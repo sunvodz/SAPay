@@ -1,0 +1,108 @@
+<body bgcolor="#ffc0cb">
+  <div align="center">
+    {{CurrentDate | date}}
+  <form class="example-form">
+
+    <mat-form-field class="example-full-width">
+      <input type="text" placeholder="idUser" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let iduser of idusers" [value]="iduser.customerID">
+            {{iduser.customerID}}
+          </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+  </form>
+</div>
+
+  <div class="search" align="center">
+      <button mat-raised-button (click)="search" color="warn">Search</button>
+  </div>
+
+<fieldset>
+  <legend>Order</legend>
+
+  <fieldset>
+    <legend>Sell And Lease</legend>
+<div class="selected" align="center">
+  <mat-form-field>
+    <mat-select [(value)]="selected">
+      <mat-option value="Lease">Lease</mat-option>
+      <mat-option value="Selling">Selling</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p>You selected: {{selected}}</p>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> Price </th>
+    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+  </ng-container>
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> Status </th>
+    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+
+</div>
+    <div class="search" align="center">
+      <br>
+      <button mat-stroked-button color="PayS">Pay</button>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Mack up and hair style</legend>
+    <div class="selected" align="center">
+      <mat-form-field>
+        <mat-select [(value)]="selected1">
+          <mat-option value="Mack up">Mack up</mat-option>
+          <mat-option value="Hair style">Hair style</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <p>You selected: {{selected1}}</p>
+
+
+    <table mat-table [dataSource]="dataSourcem" class="mat-elevation-z8" >
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    </div>
+    <div class="search" align="center">
+      <br>
+      <button mat-stroked-button color="PayM">Pay</button>
+    </div>
+  </fieldset>
+  </fieldset>
+
+
+
+</body>
