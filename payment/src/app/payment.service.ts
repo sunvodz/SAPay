@@ -13,8 +13,8 @@ getStaff(): Observable<any> {
 getCustomer(): Observable<any> {
     return this.http.get('//localhost:8080/customer');
 }
-getSelling(): Observable<any> {
-    return this.http.get('//localhost:8080/selling');
+getPayment(): Observable<any> {
+  return this.http.get('//localhost:8080/payment');
 }
 
 }
