@@ -2,17 +2,15 @@
   <div align="center">
     {{CurrentDate | date}}
   <form class="example-form">
-
     <mat-form-field class="example-full-width">
-      <input type="text" placeholder="idUser" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let iduser of idusers" [value]="iduser.customerID">
+          <mat-select placeholder="idUser" [(ngModel)]="userName" name="userName">
+          <mat-option *ngFor="let iduser of idusers" [value]="iduser.customerName">
             {{iduser.customerID}}
           </mat-option>
-      </mat-autocomplete>
+          </mat-select>
     </mat-form-field>
-    <button mat-raised-button (click)="searchId()" color="warn">Search</button>
     <p> Name: {{userName}}</p>
+    <button mat-raised-button (click)="searchId()" color="warn">Search</button>
   </form>
 </div>
 

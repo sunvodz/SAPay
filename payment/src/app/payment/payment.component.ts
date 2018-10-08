@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
-import { HttpClient} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { PaymentService } from '../payment.service';
 
 
@@ -22,7 +22,6 @@ export class PaymentComponent implements OnInit {
   userName = 'Select Id User';
   selected = 'Select';
   selected1 = 'Select';
-
   myControl = new FormControl();
   filteredIdusers: Observable<string[]>;
 
@@ -30,17 +29,16 @@ export class PaymentComponent implements OnInit {
   @ViewChild(MatSort)
   sort: MatSort;
   constructor(private payService: PaymentService ) { }
+
   ngOnInit() {
+
     this.payService.getCustomer().subscribe(data => {
       this.idusers = data;
       console.log(this.idusers);
     });
-
     this.payService.getCustomer().subscribe(data => {
       this.idusers = data;
     });
-
-
     this.payService.getPayment().subscribe(data => {
       this.payments = data;
       console.log(this.payments);
@@ -49,8 +47,9 @@ export class PaymentComponent implements OnInit {
     this.payService.getPayment().subscribe(data => {
       this.payments = data;
     });
-
   }
-
-
+  searchId(){}
+  searchLease(){}
+  searchSelling(){}
+  paymentButtom(){}
 }
