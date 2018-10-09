@@ -5,8 +5,8 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class PaymentService {
 
-  constructor(private http: HttpClient) {
-}
+  constructor(private http: HttpClient) {}
+
 getStaff(): Observable<any> {
     return this.http.get('//localhost:8080/staff');
 }

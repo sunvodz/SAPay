@@ -19,9 +19,9 @@ public class PayMent {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="payMent_seq")
     @Column(name="PayMent_ID",unique = true, nullable = false)
     private @NonNull Long pmId;
-    private @NonNull String paymentIDs;
+    private String paymentIDs;
     private @NonNull Date datePay;
-    private @NonNull String statusPay;
+    private String statusPay;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "staffId")

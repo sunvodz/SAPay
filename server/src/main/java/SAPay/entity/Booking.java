@@ -17,11 +17,11 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="booking_seq")
     @Column(name="Booking_ID",unique = true, nullable = false)
     private @NonNull Long bkId;
-    private @NonNull String bookingIDs;
-    private @NonNull Date date;
-    private @NonNull String location;
-    private @NonNull String statusBooking;
-    private @NonNull  int bookPrice;
+    private String bookingIDs;
+    private Date date;
+    private String location;
+    private String statusBooking;
+    private int bookPrice;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Customer.class)
     @JoinColumn(name = "customerId", insertable = true)

@@ -19,9 +19,10 @@ export class PaymentComponent implements OnInit {
   CurrentDate = new Date();
   idusers: Array<any>;
   payments: Array<any>;
-  userName = 'Select ID User';
+  userid = 'Select ID User';
   selected = 'Select';
   selected1 = 'Select';
+
   myControl = new FormControl();
   filteredIdusers: Observable<string[]>;
 
@@ -48,12 +49,15 @@ export class PaymentComponent implements OnInit {
     });
   }
   searchId() {
-    console.log(this.userName.customerID);
+    console.log(this.userid);
   }
-
-  searchLease() {}
+  searchLease() {  }
   searchSelling() {}
-  paymentButtom() {}
+
+  paymentButtom(
+
+  ) {}
+
   searchMackup() {}
   searchHairstyle() {}
 }

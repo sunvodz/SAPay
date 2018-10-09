@@ -19,12 +19,12 @@ public class Lease {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="lease_seq")
     @Column(name="Lease_ID",unique = true, nullable = false)
     private @NonNull Long lid;
-    private @NonNull String leaseIDs;
-    private @NonNull String leaseName;
-    private @NonNull int    leasePrice;
-    private @NonNull String statusLease;
-    private @NonNull Date   dateStart;
-    private @NonNull Date   dateEnd;
+    private String leaseIDs;
+    private String leaseName;
+    private int    leasePrice;
+    private String statusLease;
+    private Date   dateStart;
+    private Date   dateEnd;
     
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Customer.class)
     @JoinColumn(name = "customerId", insertable = true)

@@ -1,22 +1,22 @@
 package SAPay.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import SAPay.entity.*;
+import SAPay.Repository.*;
+import java.util.*;
 
-import SAPay.entity.Customer;
-import  SAPay.Repository.CustomerRepository;
-
-@RestController
 @CrossOrigin(origins = "http://localhost:4200")
+@RestController
 public class CustomerController {
+        
+        @Autowired 
         private CustomerRepository customerRepository;
-
         public CustomerController(CustomerRepository customerRepository) {
             this.customerRepository = customerRepository;
         }
-        @RequestMapping("/customer")
+        @GetMapping("/customer")
         public Collection<Customer> customer() {
         return customerRepository.findAll().stream()
                 .filter(this::isCustomer)
@@ -27,4 +27,5 @@ public class CustomerController {
                     customer.getCustomerName().equals("Ploy") ||
                     customer.getCustomerName().equals("Ao") ;
     }
+        
 }

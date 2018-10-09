@@ -3,13 +3,13 @@
     {{CurrentDate | date}}
   <form class="example-form">
     <mat-form-field class="example-full-width">
-          <mat-select placeholder="idUser" [(ngModel)]="userName" name="userName">
-          <mat-option *ngFor="let iduser of idusers" [value]="iduser">
+          <mat-select placeholder="idUser" [(ngModel)]="userid" name="userid">
+          <mat-option *ngFor="let iduser of idusers" [value]="iduser.customerID">
             {{iduser.customerID}}
           </mat-option>
           </mat-select>
     </mat-form-field>
-    <p> Name: {{userName.customerName}}</p>
+    <p> Name: {{userid}}</p>
     <button mat-raised-button (click)="searchId()" color="warn">Search</button>
   </form>
 </div>

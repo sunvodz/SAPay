@@ -1,22 +1,24 @@
 package SAPay.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.stream.Collectors;
-import SAPay.entity.Staff;
-import  SAPay.Repository.StaffRepository;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import SAPay.entity.*;
+import SAPay.Repository.*;
+import java.util.*;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
-@RestController
 
 @CrossOrigin(origins = "http://localhost:4200")
-
+@RestController
 public class StaffController {
+        
+        @Autowired  
         private StaffRepository staffRepository;
         public StaffController(StaffRepository staffRepository) {
             this.staffRepository = staffRepository;
         }
-        @RequestMapping("/staff")
+        @GetMapping("/staff")
         public Collection<Staff> staff() {
             return staffRepository.findAll().stream()
                     .filter(this::isStaff)

@@ -214,7 +214,7 @@ public class Data {
                     paymentdb.setCustomer(c1);
                     paymentdb.setStaff(st1);
                     paymentdb.setDatePay(date);
-                    paymentdb.setStatusPay("not paid");
+                    paymentdb.setStatusPay("paid");
                     payMentRepository.save(paymentdb);
                  }
                  else if(pmid == "P002"){
@@ -224,7 +224,7 @@ public class Data {
                     paymentdb.setCustomer(c2);
                     paymentdb.setStaff(st2);
                     paymentdb.setDatePay(date);
-                    paymentdb.setStatusPay("not paid");
+                    paymentdb.setStatusPay("paid");
                     payMentRepository.save(paymentdb);
                     
                  }
@@ -235,7 +235,7 @@ public class Data {
                     paymentdb.setCustomer(c3);
                     paymentdb.setStaff(st3);
                     paymentdb.setDatePay(date);
-                    paymentdb.setStatusPay("not paid");
+                    paymentdb.setStatusPay("paid");
                     payMentRepository.save(paymentdb);
                     
                 }

@@ -20,9 +20,9 @@ public class Staff {
     @Column(name="Staff_ID",unique = true, nullable = false)
 
     private @NonNull Long stID;
-    private @NonNull String staffIDs;
-    private @NonNull String staffName;
-    private @NonNull String position;
+    private String staffIDs;
+    private String staffName;
+    private String position;
 
 
 
