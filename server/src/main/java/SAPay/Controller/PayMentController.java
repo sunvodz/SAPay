@@ -42,23 +42,44 @@ public class PayMentController {
         public Collection<PayMent> payment() {
             return paymentRepository.findAll().stream()
                     .collect(Collectors.toList());
-    }
-    @PostMapping("/payment/{payid}/{statuspay}/datePay/{staff}/{customer}/{booking}/{selling}/{lease}")
-    public PayMent newPayMent(@PathVariable String payid,@PathVariable String statuspay,String datePay,
-                            @PathVariable  String staff,@PathVariable String customer,@PathVariable String booking,
-                            @PathVariable  String selling,@PathVariable  String lease){
+        }
+        @GetMapping("/customer")
+        public Collection<Customer> customer() {
+        return customerRepository.findAll().stream()
+            .filter(this::isCustomer)
+            .collect(Collectors.toList());
+        }
+        private boolean isCustomer(Customer customer){
+        return customer.getCustomerName().equals("Sunvo") ||
+                customer.getCustomerName().equals("Ploy") ||
+                customer.getCustomerName().equals("Ao") ;
+        }
+        @GetMapping("/staff")
+        public Collection<Staff> staff() {
+            return staffRepository.findAll().stream()
+                    .filter(this::isStaff)
+                    .collect(Collectors.toList());
+        }
+            private boolean isStaff(Staff staff){
+                return staff.getStaffName().equals("Admin");
+        }
+        @PostMapping("/payment/{payid}/{statuspay}/{staff}/{customer}/{booking}/{selling}/{lease}")
+        public PayMent newPayMent(@PathVariable String payid,@PathVariable String statuspay,
+                            @PathVariable  String staff,@PathVariable String customer,
+                            @PathVariable String booking,@PathVariable  String selling,
+                            @PathVariable  String lease){
         PayMent newPayMent = new PayMent();
         newPayMent.setStatusPay(statuspay);
         newPayMent.setPaymentIDs(payid);
         
-        Date datePays = new Date();
-        newPayMent.setDatePay(datePays);
+        Date datePay = new Date();
+        newPayMent.setDatePay(datePay);
 
         Staff staffid = staffRepository.findByStaffIDs(staff);
         newPayMent.setStaff(staffid);
 
-        Customer customername = customerRepository.findByCustomerName(customer);
-        newPayMent.setCustomer(customername); 
+        Customer customerid = customerRepository.findByCustomerID(customer);
+        newPayMent.setCustomer(customerid);
         
         Booking bookingid = bookingRepository.findByBookingIDs(booking);
         newPayMent.setBooking(bookingid); 
@@ -67,10 +88,8 @@ public class PayMentController {
         newPayMent.setSelling(sellingid); 
 
         Lease leaseid = leaseRepository.findByLeaseIDs(lease);
-        newPayMent.setLease(leaseid); 
+        newPayMent.setLease(leaseid);
 
         return paymentRepository.save(newPayMent); 
-    } 
-    
-        
+    }
 }

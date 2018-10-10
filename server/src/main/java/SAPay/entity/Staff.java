@@ -23,8 +23,4 @@ public class Staff {
     private String staffIDs;
     private String staffName;
     private String position;
-
-
-
-
 }

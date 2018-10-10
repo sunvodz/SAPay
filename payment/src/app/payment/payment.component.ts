@@ -51,13 +51,9 @@ export class PaymentComponent implements OnInit {
   searchId() {
     console.log(this.userid);
   }
-  searchLease() {  }
-  searchSelling() {}
 
   paymentButtom(
 
   ) {}
 
-  searchMackup() {}
-  searchHairstyle() {}
 }
