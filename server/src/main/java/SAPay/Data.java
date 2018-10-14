@@ -110,7 +110,7 @@ public class Data {
                     
                  if (bkid == "B001") {
                     bookingdb.setBookPrice(300);
-                    bookingdb.setDate(date);
+                    bookingdb.setBookingDate(date);
                     bookingdb.setLocation("Suranaree");
                     bookingdb.setCustomer(c1);
                     bookingdb.setStatusBooking("not paid");
@@ -120,7 +120,7 @@ public class Data {
                  }
                  else if(bkid == "B002"){
                     bookingdb.setBookPrice(500);
-                    bookingdb.setDate(date);
+                    bookingdb.setBookingDate(date);
                     bookingdb.setLocation("KORAT");
                     bookingdb.setCustomer(c2);
                     bookingdb.setStatusBooking("not paid");
@@ -129,10 +129,10 @@ public class Data {
                  }
                  else if(bkid == "B003"){
                     bookingdb.setBookPrice(1000);
-                    bookingdb.setDate(date);
+                    bookingdb.setBookingDate(date);
                     bookingdb.setLocation("Bangkok");
                     bookingdb.setCustomer(c3);
-                    bookingdb.setStatusBooking("not paid");
+                    bookingdb.setStatusBooking("paid");
                     bookingdb.setStaff(st3);
                     bookingRepository.save(bookingdb);
                 }
@@ -149,7 +149,7 @@ public class Data {
                     leasedb.setCustomer(c1);
                     leasedb.setDateStart(date);
                     leasedb.setDateEnd(date);
-                    leasedb.setStatusLease("not paid");
+                    leasedb.setStatusLease("paid");
                     leaseRepository.save(leasedb);
                  }
                  else if(leid == "L002"){
@@ -171,7 +171,7 @@ public class Data {
                     leaseRepository.save(leasedb);
                 }
                 });
-                Stream.of("SL001","SL003").forEach(slid -> {
+                Stream.of("SL001","SL002").forEach(slid -> {
                     Selling sellingdb = new Selling();
                     sellingdb.setSellingIDs(slid);
                     sellingRepository.save(sellingdb);
@@ -184,11 +184,11 @@ public class Data {
                     sellingRepository.save(sellingdb);
                  }
                  
-                 else if(slid == "SL003"){
+                 else if(slid == "SL002"){
                     sellingdb.setSellingName("Lao");
                     sellingdb.setSellingPrice(1500);
                     sellingdb.setCustomer(c3);
-                    sellingdb.setStatusSelling("not paid");
+                    sellingdb.setStatusSelling("paid");
                     sellingRepository.save(sellingdb);
                 }
                 });
@@ -208,9 +208,8 @@ public class Data {
                     payMentRepository.save(paymentdb);
                     
                  if (pmid == "P001") {
-                    paymentdb.setBooking(bk1);
+                    paymentdb.setTypePay("Lease");
                     paymentdb.setLease(le1);
-                    paymentdb.setSelling(sl1);
                     paymentdb.setCustomer(c1);
                     paymentdb.setStaff(st1);
                     paymentdb.setDatePay(date);
@@ -218,8 +217,8 @@ public class Data {
                     payMentRepository.save(paymentdb);
                  }
                  else if(pmid == "P002"){
-                    paymentdb.setBooking(bk2);
-                    paymentdb.setLease(le2);
+                    
+                    paymentdb.setTypePay("Selling");
                     paymentdb.setSelling(sl2);
                     paymentdb.setCustomer(c2);
                     paymentdb.setStaff(st2);
@@ -229,9 +228,8 @@ public class Data {
                     
                  }
                  else if(pmid == "P003"){
+                    paymentdb.setTypePay("Booking");
                     paymentdb.setBooking(bk3);
-                    paymentdb.setLease(le3);
-                    paymentdb.setSelling(sl3);
                     paymentdb.setCustomer(c3);
                     paymentdb.setStaff(st3);
                     paymentdb.setDatePay(date);

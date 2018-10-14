@@ -41,8 +41,43 @@ public class PayMentController {
         @GetMapping("/payment")
         public Collection<PayMent> payment() {
             return paymentRepository.findAll().stream()
+                    .filter(this::isPayMent)
                     .collect(Collectors.toList());
         }
+        private boolean isPayMent(PayMent payMent){
+            return payMent.getStatusPay().equals("paid") ;
+        }
+        
+        @GetMapping("/selling")
+        public Collection<Selling> selling() {
+            return sellingRepository.findAll().stream()
+                    .filter(this::isSelling)
+                    .collect(Collectors.toList());
+        }
+        private boolean isSelling(Selling selling){
+            return selling.getStatusSelling().equals("not paid") ;
+        }
+
+        @GetMapping("/lease")
+        public Collection<Lease> lease() {
+            return leaseRepository.findAll().stream()
+                    .filter(this::isLease)
+                    .collect(Collectors.toList());
+        }
+        private boolean isLease(Lease lease){
+            return lease.getStatusLease().equals("not paid") ;
+        }
+
+        @GetMapping("/booking")
+        public Collection<Booking> booking() {
+            return bookingRepository.findAll().stream()
+                    .filter(this::isBooking)
+                    .collect(Collectors.toList());
+        }
+        private boolean isBooking(Booking booking){
+            return booking.getStatusBooking().equals("not paid") ;
+        }
+
         @GetMapping("/customer")
         public Collection<Customer> customer() {
         return customerRepository.findAll().stream()

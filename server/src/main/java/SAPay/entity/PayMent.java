@@ -21,6 +21,7 @@ public class PayMent {
     private @NonNull Long pmId;
     private String paymentIDs;
     private @NonNull Date datePay;
+    private String typePay;
     private String statusPay;
 
     @OneToOne(fetch = FetchType.EAGER)

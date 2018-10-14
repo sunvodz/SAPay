@@ -18,7 +18,7 @@ public class Booking {
     @Column(name="Booking_ID",unique = true, nullable = false)
     private @NonNull Long bkId;
     private String bookingIDs;
-    private Date date;
+    private Date bookingDate;
     private String location;
     private String statusBooking;
     private int bookPrice;
