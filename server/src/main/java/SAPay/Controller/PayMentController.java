@@ -127,4 +127,33 @@ public class PayMentController {
 
         return paymentRepository.save(newPayMent); 
     }
+
+    @PutMapping("/booking/{id}/{statusBooking}")
+    Booking replaceBooking(Booking newBooking, @PathVariable String statusBooking, @PathVariable Long id){
+
+        return bookingRepository.findById(id)
+                    .map(booking ->{
+                    booking.setStatusBooking(statusBooking);
+                    return bookingRepository.save(booking);
+                }
+                ).orElseGet(() ->{
+                    newBooking.setBkId(id);
+                    return bookingRepository.save(newBooking);
+        });
+}
+    @PutMapping("/selling/{id}/{statusSelling}")
+    Selling replaceSelling(Selling newSelling, @PathVariable String statusSelling, @PathVariable Long id){
+
+    return sellingRepository.findById(id)
+                .map(selling ->{
+                selling.setStatusSelling(statusSelling);
+                return sellingRepository.save(selling);
+            }
+            ).orElseGet(() ->{
+                newSelling.setSeid(id);
+                return sellingRepository.save(newSelling);
+    });
+}
+
+
 }

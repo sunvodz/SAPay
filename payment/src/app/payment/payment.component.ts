@@ -4,7 +4,6 @@ import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { PaymentService } from '../payment.service';
-import { getLocaleEraNames } from '@angular/common';
 
 
 @Component({
@@ -22,13 +21,18 @@ export class PaymentComponent implements OnInit {
   CurrentDate = new Date();
   idusers: Array<any>;
   payments: Array<any>;
-  table;
-  type;
+  table = {
+    cusid: '',
+    cusname: '',
+    name : '',
+    price : '',
+    status : ''
+  };
+  type: Array<any>;
+
   userid = 'Select ID User';
   selected = 'Select';
 
-  myControl = new FormControl();
-  filteredIdusers: Observable<string[]>;
 
   @ViewChild(MatSort)
   sort: MatSort;
@@ -47,19 +51,26 @@ export class PaymentComponent implements OnInit {
   }
   searchId() {
     if (this.selected === 'Lease') {
-      this.type = 'lease';
-      this.table = ['CustomerId' , 'customerName'  , 'Name' , 'Price' , 'status'];
-      console.log(this.userid , this.type)  ;
+      this.payService.getLease().subscribe(data => {
+      this.selected = data;
+      this.table = {cusid : 'CustomerId' , cusname : 'customerName' ,  name : 'leaseName' ,
+      price: 'leasePrice' , status: 'statusLease'};
+      });
+      console.log(this.userid , this.type);
+
     } else if (this.selected === 'Selling') {
-      this.type = 'Selling';
-      this.table = [ 'CustomerId' , 'customerName'  , 'Name' , 'Price' , 'status'];
-      console.log(this.userid , this.type);
+      this.selected = 'Selling';
+      this.table = {cusid : 'CustomerId' , cusname : 'customerName' ,  name : 'sellingName' ,
+      price: 'bookPrice' , status: 'statusSelling'};
+
     } else if (this.selected === 'Mack up and hair style') {
-      this.type = 'Mack up and hair style';
-      this.table = [ 'CustomerId' , 'customerName'  , 'Name' , 'Price' , 'status'];
-      console.log(this.userid , this.type);
+      this.selected = 'Mack up and hair style';
+      this.table = {cusid : 'CustomerId' , cusname : 'customerName' ,  name : 'bookingIDs' ,
+      price: 'bookPrice' , status: 'statusBooking'};
+
     } else if (this.userid === 'Select ID User') {
       alert('กรุณาเลือก Iduser');
+
     } else {
       alert('กรุณาเลือก Order');
     }

@@ -10,4 +10,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public interface BookingRepository extends JpaRepository<Booking, Long>{
     Booking findByBkId(Long id);
     Booking findByBookingIDs(String bookingIDs);
+    Booking findByStatusBooking(String status);
 }

@@ -132,7 +132,7 @@ public class Data {
                     bookingdb.setBookingDate(date);
                     bookingdb.setLocation("Bangkok");
                     bookingdb.setCustomer(c3);
-                    bookingdb.setStatusBooking("paid");
+                    bookingdb.setStatusBooking("not paid");
                     bookingdb.setStaff(st3);
                     bookingRepository.save(bookingdb);
                 }
@@ -188,21 +188,13 @@ public class Data {
                     sellingdb.setSellingName("Lao");
                     sellingdb.setSellingPrice(1500);
                     sellingdb.setCustomer(c3);
-                    sellingdb.setStatusSelling("paid");
+                    sellingdb.setStatusSelling("not paid");
                     sellingRepository.save(sellingdb);
                 }
                 });
-                Booking bk1 = bookingRepository.findByBkId(1L);
-                Booking bk2 = bookingRepository.findByBkId(2L);
-                Booking bk3 = bookingRepository.findByBkId(3L);
                 Lease le1 = leaseRepository.findByLid(1L);
-                Lease le2 = leaseRepository.findByLid(2L);
-                Lease le3 = leaseRepository.findByLid(3L);
-                Selling sl1 = sellingRepository.findBySeid(1L);
-                Selling sl2 = sellingRepository.findBySeid(2L);
-                Selling sl3 = sellingRepository.findBySeid(3L);
 
-                Stream.of("P001","P002","P003").forEach(pmid -> {
+                Stream.of("P001").forEach(pmid -> {
                     PayMent paymentdb = new PayMent();
                     paymentdb.setPaymentIDs(pmid);
                     payMentRepository.save(paymentdb);
@@ -216,27 +208,6 @@ public class Data {
                     paymentdb.setStatusPay("paid");
                     payMentRepository.save(paymentdb);
                  }
-                 else if(pmid == "P002"){
-                    
-                    paymentdb.setTypePay("Selling");
-                    paymentdb.setSelling(sl2);
-                    paymentdb.setCustomer(c2);
-                    paymentdb.setStaff(st2);
-                    paymentdb.setDatePay(date);
-                    paymentdb.setStatusPay("paid");
-                    payMentRepository.save(paymentdb);
-                    
-                 }
-                 else if(pmid == "P003"){
-                    paymentdb.setTypePay("Booking");
-                    paymentdb.setBooking(bk3);
-                    paymentdb.setCustomer(c3);
-                    paymentdb.setStaff(st3);
-                    paymentdb.setDatePay(date);
-                    paymentdb.setStatusPay("paid");
-                    payMentRepository.save(paymentdb);
-                    
-                }
                 });
             
                 System.out.println("\n Spring-Boot Complete");

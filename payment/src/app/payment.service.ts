@@ -14,9 +14,15 @@ getCustomer(): Observable<any> {
     return this.http.get('//localhost:8080/customer');
 }
 getPayment(): Observable<any> {
-  return this.http.get('//localhost:8080/lease'),
-  this.http.get('//localhost:8080/selling'),
-  this.http.get('//localhost:8080/booking');
+  return this.http.get('//localhost:8080/payment');
 }
-
+getLease(): Observable<any> {
+  return this.http.get('//localhost:8080/lease');
+}
+getSelling(): Observable<any> {
+  return this.http.get('//localhost:8080/selling');
+}
+getBooking(): Observable<any> {
+  return this.http.get('//localhost:8080/booking');
+}
 }

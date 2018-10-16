@@ -32,35 +32,35 @@
   <p>You selected: {{selected}}</p>
   <button mat-raised-button (click)="searchId()" color="warn">Search</button>
 
-<table mat-table [dataSource] = "type" class="mat-elevation-z8" >
+<table mat-table [dataSource] = "table" class="mat-elevation-z8" >
 
-  <ng-container matColumnDef="CustomerId">
-    <th mat-header-cell *matHeaderCellDef> CustomerId</th>
-    <td mat-cell *matCellDef="let element"> {{element.userid.customerID}} </td>
+  <ng-container matColumnDef="cusid">
+    <th mat-header-cell *matHeaderCellDef> CustomerId </th>
+    <td mat-cell *matCellDef="let element"> {{element.cusid}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="customerName">
+  <ng-container matColumnDef="cusname">
     <th mat-header-cell *matHeaderCellDef> CustomerName </th>
-    <td mat-cell *matCellDef="let element"> {{element.userid.customerName}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.cusname}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="Name">
-    <th mat-header-cell *matHeaderCellDef> NameOrder</th>
-    <td mat-cell *matCellDef="let element"> {{element.selected.Name}} </td>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> NameOrder </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="Price">
-    <th mat-header-cell *matHeaderCellDef> PriceOrder</th>
-    <td mat-cell *matCellDef="let element"> {{element.selected.Price}} </td>
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> PriceOrder </th>
+    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
   </ng-container>
 
   <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef> StatusOrder</th>
-    <td mat-cell *matCellDef="let element"> {{element.selected.status }} </td>
+    <th mat-header-cell *matHeaderCellDef> StatusOrder </th>
+    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="table"></tr>
-  <tr mat-row *matRowDef="let row; columns: table;"></tr>
+  <tr mat-header-row *matHeaderRowDef="type"></tr>
+  <tr mat-row *matRowDef="let row; columns: type;"></tr>
 
 </table>
 <br>

@@ -31,4 +31,8 @@ public class Booking {
     @JoinColumn(name = "staffId", insertable = true)
     public Staff staff;
 
+    public Booking(String statusBooking) {
+        this.statusBooking = statusBooking;
+    }
+
 }
