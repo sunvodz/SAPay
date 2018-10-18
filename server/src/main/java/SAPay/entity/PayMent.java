@@ -29,22 +29,7 @@ public class PayMent {
     private Staff staff;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "bookingId")
-    private Booking booking;
-
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "leaseId")
-    private Lease lease;
-
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "sellingId")
-    private Selling selling;
-
-    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customerId")
     private Customer customer;
-
-
-
 
 }

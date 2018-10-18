@@ -3,13 +3,12 @@
     {{CurrentDate | date}}
   <form class="example-form">
     <mat-form-field class="example-full-width">
-          <mat-select placeholder="idUser" [(ngModel)]="userid" name="userid">
+          <mat-select placeholder="idUser" [value]="searchData.userId" [(ngModel)]="searchData.userId" name="userid">
           <mat-option *ngFor="let iduser of idusers" [value]="iduser.customerID">
             {{iduser.customerID}}
           </mat-option>
           </mat-select>
     </mat-form-field>
-
     </form>
 </div>
 
@@ -17,52 +16,42 @@
   <legend>Order</legend>
   <fieldset>
     <legend>Sell And Lease Mack up and hair style</legend>
-    <div align="center"><p> UserId: {{userid}}</p></div>
+    <div align="center"><p> UserId: {{searchData.userId}}</p></div>
 
 <div class="selected" align="center">
 
-  <mat-form-field>
-    <mat-select [(value)]="selected">
-      <mat-option value="Lease" >Lease</mat-option>
-      <mat-option value="Selling" >Selling</mat-option>
-      <mat-option value="Mack up and hair style" >Mack up and hair style</mat-option>
-
-    </mat-select>
-  </mat-form-field>
-  <p>You selected: {{selected}}</p>
   <button mat-raised-button (click)="searchId()" color="warn">Search</button>
 
-<table mat-table [dataSource] = "table" class="mat-elevation-z8" >
+  <table mat-table [dataSource]="leases"  class="mat-elevation-z8">
+    <ng-container matColumnDef="customerID">
+      <th mat-header-cell *matHeaderCellDef> customerID </th>
+      <td mat-cell *matCellDef="let element"> {{element.customer.customerID}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="cusid">
-    <th mat-header-cell *matHeaderCellDef> CustomerId </th>
-    <td mat-cell *matCellDef="let element"> {{element.cusid}} </td>
-  </ng-container>
+    <ng-container matColumnDef="CustomerName">
+      <th mat-header-cell *matHeaderCellDef> CustomerName </th>
+      <td mat-cell *matCellDef="let element"> {{element.customer.customerName}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="cusname">
-    <th mat-header-cell *matHeaderCellDef> CustomerName </th>
-    <td mat-cell *matCellDef="let element"> {{element.cusname}} </td>
-  </ng-container>
+    <ng-container matColumnDef="LeaseName">
+      <th mat-header-cell *matHeaderCellDef> OrderName </th>
+      <td mat-cell *matCellDef="let element"> {{element.leaseIDs}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> NameOrder </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
+    <ng-container matColumnDef="LeasePrice">
+      <th mat-header-cell *matHeaderCellDef> OrderPrice </th>
+      <td mat-cell *matCellDef="let element"> {{element.leasePrice}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="price">
-    <th mat-header-cell *matHeaderCellDef> PriceOrder </th>
-    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-  </ng-container>
+    <ng-container matColumnDef="LeaseStatus">
+      <th mat-header-cell *matHeaderCellDef> OrderStatus </th>
+      <td mat-cell *matCellDef="let element"> {{element.statusLease}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef> StatusOrder </th>
-    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-  </ng-container>
+    <tr mat-header-row *matHeaderRowDef="ColumnLease"></tr>
+    <tr mat-row *matRowDef="let row; columns: ColumnLease;"></tr>
+  </table>
 
-  <tr mat-header-row *matHeaderRowDef="type"></tr>
-  <tr mat-row *matRowDef="let row; columns: type;"></tr>
-
-</table>
 <br>
       <button mat-stroked-button color="PayS" (click)="paymentButtom()">Pay</button>
 </div>

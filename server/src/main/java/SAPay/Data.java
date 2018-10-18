@@ -180,7 +180,7 @@ public class Data {
                     sellingdb.setSellingName("Lao");
                     sellingdb.setSellingPrice(1500);
                     sellingdb.setCustomer(c1);
-                    sellingdb.setStatusSelling("not paid");
+                    sellingdb.setStatusSelling("paid");
                     sellingRepository.save(sellingdb);
                  }
                  
@@ -201,7 +201,6 @@ public class Data {
                     
                  if (pmid == "P001") {
                     paymentdb.setTypePay("Lease");
-                    paymentdb.setLease(le1);
                     paymentdb.setCustomer(c1);
                     paymentdb.setStaff(st1);
                     paymentdb.setDatePay(date);

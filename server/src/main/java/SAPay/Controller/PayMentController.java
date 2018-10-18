@@ -38,6 +38,7 @@ public class PayMentController {
             this.sellingRepository = sellingRepository;
             this.leaseRepository = leaseRepository;
         }
+        
         @GetMapping("/payment")
         public Collection<PayMent> payment() {
             return paymentRepository.findAll().stream()
@@ -45,37 +46,35 @@ public class PayMentController {
                     .collect(Collectors.toList());
         }
         private boolean isPayMent(PayMent payMent){
-            return payMent.getStatusPay().equals("paid") ;
+            return payMent.getStatusPay().equals("paid");
         }
+
+        @GetMapping("/selling/{customerID}")
+        public Selling retrieveSelling(@PathVariable String customerID) {
+            Customer customerid = customerRepository.findByCustomerID(customerID);
+            Optional<Selling> selling = sellingRepository.findByCustomer(customerid);
+            return selling.get();	    
+        }
+
+
+
         
-        @GetMapping("/selling")
-        public Collection<Selling> selling() {
-            return sellingRepository.findAll().stream()
-                    .filter(this::isSelling)
-                    .collect(Collectors.toList());
-        }
-        private boolean isSelling(Selling selling){
-            return selling.getStatusSelling().equals("not paid") ;
-        }
+        @GetMapping(path = "/lease/{customerID}")
+        public Collection <Lease> Lease(@PathVariable String customerID) {
+            System.out.println(customerID);
+            Customer customerid = customerRepository.findByCustomerID(customerID);
+            Collection<Lease> S =  leaseRepository.findByCustomer(customerid);
+            System.out.println(S);
+        return S;
 
-        @GetMapping("/lease")
-        public Collection<Lease> lease() {
-            return leaseRepository.findAll().stream()
-                    .filter(this::isLease)
-                    .collect(Collectors.toList());
-        }
-        private boolean isLease(Lease lease){
-            return lease.getStatusLease().equals("not paid") ;
-        }
+    }
 
-        @GetMapping("/booking")
-        public Collection<Booking> booking() {
-            return bookingRepository.findAll().stream()
-                    .filter(this::isBooking)
-                    .collect(Collectors.toList());
-        }
-        private boolean isBooking(Booking booking){
-            return booking.getStatusBooking().equals("not paid") ;
+        @GetMapping("/booking/{customerID}")
+        public Booking retrieveBooking(@PathVariable String customerID) {
+            Customer customerid = customerRepository.findByCustomerID(customerID);
+            Optional<Booking> booking = bookingRepository.findByCustomer(customerid);
+            
+	    return booking.get();
         }
 
         @GetMapping("/customer")
@@ -98,33 +97,24 @@ public class PayMentController {
             private boolean isStaff(Staff staff){
                 return staff.getStaffName().equals("Admin");
         }
-        @PostMapping("/payment/{payid}/{statuspay}/{staff}/{customer}/{booking}/{selling}/{lease}")
+        @PostMapping("/payment/{payid}/{typepay}/{statuspay}/{staff}/{customer}")
         public PayMent newPayMent(@PathVariable String payid,@PathVariable String statuspay,
-                            @PathVariable  String staff,@PathVariable String customer,
-                            @PathVariable String booking,@PathVariable  String selling,
-                            @PathVariable  String lease){
+                            @PathVariable  String staffids,@PathVariable String customerids,
+                            @PathVariable String typepay){
         PayMent newPayMent = new PayMent();
         newPayMent.setStatusPay(statuspay);
         newPayMent.setPaymentIDs(payid);
+        newPayMent.setTypePay(typepay);
         
         Date datePay = new Date();
         newPayMent.setDatePay(datePay);
 
-        Staff staffid = staffRepository.findByStaffIDs(staff);
+        Staff staffid = staffRepository.findByStaffIDs(staffids);
         newPayMent.setStaff(staffid);
 
-        Customer customerid = customerRepository.findByCustomerID(customer);
+        Customer customerid = customerRepository.findByCustomerID(customerids);
         newPayMent.setCustomer(customerid);
         
-        Booking bookingid = bookingRepository.findByBookingIDs(booking);
-        newPayMent.setBooking(bookingid); 
-
-        Selling sellingid = sellingRepository.findBySellingIDs(selling);
-        newPayMent.setSelling(sellingid); 
-
-        Lease leaseid = leaseRepository.findByLeaseIDs(lease);
-        newPayMent.setLease(leaseid);
-
         return paymentRepository.save(newPayMent); 
     }
 
@@ -152,6 +142,19 @@ public class PayMentController {
             ).orElseGet(() ->{
                 newSelling.setSeid(id);
                 return sellingRepository.save(newSelling);
+    });
+}
+    @PutMapping("/lease/{id}/{statusLease}")
+    Lease replaceLease(Lease newLease, @PathVariable String statusLease, @PathVariable Long id){
+
+    return leaseRepository.findById(id)
+                .map(lease ->{
+                lease.setStatusLease(statusLease);
+                return leaseRepository.save(lease);
+            }
+            ).orElseGet(() ->{
+                newLease.setLid(id);
+                return leaseRepository.save(newLease);
     });
 }
 

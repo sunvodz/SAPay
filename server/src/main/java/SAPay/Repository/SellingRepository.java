@@ -1,5 +1,8 @@
 package SAPay.Repository;
-import SAPay.entity.Selling;
+import SAPay.entity.*;
+
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,4 +12,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public interface SellingRepository extends JpaRepository<Selling, Long> {
     Selling findBySeid(Long id);
     Selling findBySellingIDs(String sellingIDs);
+    Optional<Selling> findByCustomer(Customer cuntomerID);
+	Optional<Selling> findByStatusSelling(String status);
 }
