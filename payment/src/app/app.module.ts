@@ -38,6 +38,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material';
 import { PaymentService } from './payment.service';
+import { HistoryComponent } from './history/history.component';
 
 const appRoutes: Routes = [
 ];
@@ -45,7 +46,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    PaymentComponent
+    PaymentComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,

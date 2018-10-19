@@ -1,16 +1,7 @@
 import { Component, OnInit} from '@angular/core';
-import { DataSource } from '@angular/cdk/collections';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { PaymentService } from '../payment.service';
 
-
-export interface Lease {
-  userID: string;
-  LeaseName: string;
-  LeasePrice: String;
-  LeaseStatus: String;
-}
 
 @Component({
   selector: 'app-payment',
@@ -22,21 +13,51 @@ export interface Lease {
 export class PaymentComponent implements OnInit {
 
   CurrentDate = new Date();
-  idusers: Array<any>;
-  leases: Array<any>;
-  sellings: Array<any>;
-  bookings: Array<any>;
-  payments: Array<any>;
-  selected = 'Select';
+  lease: Array<any>;
+  selling: Array<any>;
+  booking: Array<any>;
   userId: Array<any>;
-  searchData = {
-    userId : 'Select ID User',
+
+
+  LeaseName: Array<any>;
+  LeasePrice: Array<any>;
+  LeaseStatus: Array<any>;
+
+
+  SellingName: Array<any>;
+  SellingPrice: Array<any>;
+  StatusSelling: Array<any>;
+
+  Bookingid: Array<any>;
+  BookingPrice: Array<any>;
+  StatusBooking: Array<any>;
+
+  userData = {
+    userId : ''
   };
 
-  ColumnLease: string[] = ['customerID', 'CustomerName', 'LeaseName' , 'LeasePrice', 'LeaseStatus'];
+  leaseData = {
+    LeaseName: '',
+    LeasePrice: '',
+    LeaseStatus: ''
+  };
 
-  // ColumnSelling: string[] = ['customerID', 'CustomerName', 'SellingName' , 'SellingPrice', 'SellingStatus'];
-  // ColumnBooking: string[] = ['customerID', 'CustomerName', 'BookingName' , 'BookingPrice', 'BookingStatus'];
+  sellingData = {
+    SellingName: '',
+    SellingPrice: '',
+    StatusSelling: ''
+  };
+
+  bookingData = {
+    Bookingid: '',
+    BookingPrice: '',
+    StatusBooking: ''
+  };
+  num = 1;
+  lid = 0;
+  sell = 0;
+  book = 0;
+  payment: Array<any>;
 
 
   constructor(private paymentService: PaymentService, private httpClient: HttpClient ) { }
@@ -44,48 +65,145 @@ export class PaymentComponent implements OnInit {
   ngOnInit() {
 
     this.paymentService.getCustomer().subscribe(data => {
-      this.idusers = data;
-      console.log(this.idusers);
+      this.userId = data;
+      console.log(this.userId);
     });
-    this.paymentService.getPayment().subscribe(data => {
-      this.payments = data;
-      console.log(this.payments);
-    });
+
+
+
   }
   searchId() {
-
-    this.httpClient.get('http://localhost:8080/lease/' + this.searchData.userId)
+    this.httpClient.get('http://localhost:8080/lease'),
+    this.httpClient.get('http://localhost:8080/selling'),
+    this.httpClient.get('http://localhost:8080/booking')
     .subscribe(
         data => {
-          this.paymentService.getLease(this.searchData.userId);
-            console.log('Search successful', data);
+          this.paymentService.getLease(), this.paymentService.getSelling();
+            console.log('Search id successful', data);
         },
         error => {
             console.log('Error', error);
         }
     );
-    this.paymentService.getLease(this.searchData.userId).subscribe(data => {
-      this.leases = data;
-      console.log(this.leases);
+    this.paymentService.getLease().subscribe(data => {
+      this.LeaseName = data;
+      this.LeasePrice = data;
+      this.LeaseStatus = data;
+      console.log(this.LeaseName);
+    });
+
+    this.paymentService.getSelling().subscribe(data => {
+      this.SellingName = data;
+      this.SellingPrice = data;
+      this.StatusSelling = data;
+      console.log(this.SellingName);
+    });
+
+    this.paymentService.getBooking().subscribe(data => {
+      this.Bookingid = data;
+      this.BookingPrice = data;
+      this.StatusBooking = data;
+      console.log(this.Bookingid);
     });
   }
+  payLeaseButtom() {
 
-
-  paymentButtom() {
-    if (this.selected === 'lease') {
-      alert('จ่ายการจองสำเร็จ');
-      console.log(this.searchData.userId ) ;
-    } else if (this.selected === 'selling') {
-      alert('จ่ายการซื้อสำเร็จ');
-      console.log(this.searchData.userId );
-    } else if (this.selected === 'booking') {
-      alert('จ่ายการจองบริการแต่งหน้าสำเร็จ');
-      console.log(this.searchData.userId );
-    } else if (this.searchData.userId === 'Select ID User') {
-      alert('กรุณาเลือก Iduser');
-    } else {
-      alert('กรุณาเลือก Order');
+    if (this.leaseData.LeaseName === '' ||
+    this.leaseData.LeasePrice ===  ''
+    ) {
+     alert('กรอกข้อมูลให้ครบถ้วน');
+} else {
+  this.num++;
+  this.httpClient.post('http://localhost:8080/payment/'+ 'P00' + this.num + '/' + 'Lease' + '/' + 'paid' + '/' + this.userData.userId, this.payment)
+  .subscribe(
+    data => {
+        console.log('Post successful', data);
+        alert('สำเร็จ');
+    },
+    error => {
+        console.log('Error', error);
     }
+);
+this.lid++;
+this.httpClient.put('http://localhost:8080/lease/' + this.lid + '/' + this.leaseData.LeaseStatus, this.lease)
+    .subscribe(
+      data => {
+        if (data) {
+          console.log('Success');
+        }
+      },
+      error => {
+      console.log('error', error);
+    }
+    );
+
   }
+}
+  paySellingButtom() {
+    if (this.sellingData.SellingName === '' ||
+    this.sellingData.SellingPrice ===  ''
+    ) {
+     alert('กรอกข้อมูลให้ครบถ้วน');
+} else {
+  this.num++ ;
+  this.httpClient.post('http://localhost:8080/payment/'+ 'S00' + this.num + '/' + 'Selling' + '/' + 'paid' + '/' + this.userData.userId, this.payment)
+  .subscribe(
+    data => {
+        console.log('Post successful', data);
+        alert('สำเร็จ');
+    },
+    error => {
+        console.log('Error', error);
+    }
+);
+
+  }
+  this.sell++;
+this.httpClient.put('http://localhost:8080/selling/' + this.sell + '/' + this.sellingData.StatusSelling, this.selling)
+    .subscribe(
+      data => {
+        if (data) {
+          console.log('Success');
+        }
+      },
+      error => {
+      console.log('error', error);
+    }
+    );
+  }
+  payBookingButtom() {
+
+    if (this.bookingData.Bookingid === '' ||
+  this.bookingData.BookingPrice ===  ''
+  ) {
+   alert('กรอกข้อมูลให้ครบถ้วน');
+} else {
+  this.num++ ;
+this.httpClient.post('http://localhost:8080/payment/'+ 'B00' + this.num + '/' + 'Booking' + '/' + 'paid' + '/' + this.userData.userId, this.payment)
+.subscribe(
+  data => {
+      console.log('Post successful', data);
+      alert('สำเร็จ');
+  },
+  error => {
+      console.log('Error', error);
+  }
+);
+
+}
+this.book++;
+this.httpClient.put('http://localhost:8080/booking/' + this.book + '/' + this.bookingData.StatusBooking, this.booking)
+    .subscribe(
+      data => {
+        if (data) {
+          console.log('Success');
+        }
+      },
+      error => {
+      console.log('error', error);
+    }
+    );
+}
+
 
 }

@@ -16,15 +16,15 @@ getCustomer(): Observable<any> {
  getPayment(): Observable<any> {
    return this.http.get('//localhost:8080/payment');
  }
-getSelling(cusid): Observable<any> {
-  return this.http.get('//localhost:8080/selling/' + cusid);
+getSelling(): Observable<any> {
+  return this.http.get('//localhost:8080/selling');
 }
-getBooking(cusid): Observable<any> {
-  return this.http.get('//localhost:8080/booking/' + cusid);
+getBooking(): Observable<any> {
+  return this.http.get('//localhost:8080/booking');
 }
 
-getLease(cusid): Observable<any> {
-  return this.http.get('//locahost:8080/lease/' + cusid );
+ getLease(): Observable<any> {
+  return this.http.get('//localhost:8080/lease' );
 }
 
 }

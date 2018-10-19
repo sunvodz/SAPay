@@ -2,7 +2,7 @@ package SAPay.Repository;
 
 import SAPay.entity.Customer;
 import SAPay.entity.Lease;
-import java.util.Collection;
+
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,5 +15,5 @@ public interface LeaseRepository extends JpaRepository<Lease, Long>{
     Lease findByLid(Long id);
     Lease findByLeaseIDs(String leaseIDs);
     Lease findByStatusLease(String statuslease);
-    Collection<Lease> findByCustomer(Customer customerid);
+	Optional<Lease> findByCustomer(Customer customerid);
 }
