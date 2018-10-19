@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PaymentService } from '../payment.service';
+
 
 @Component({
   selector: 'app-history',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryComponent implements OnInit {
 
-  constructor() { }
+  payment: Array<any>;
+
+  displayedColumns: string[] = ['pmId', 'datePay', 'typePay', 'statusPay', 'customerName'];
+
+  constructor(private paymentService: PaymentService) { }
 
   ngOnInit() {
+    this.paymentService.getPayment().subscribe(data => {
+      this.payment = data;
+      console.log(this.payment);
+    });
   }
 
 }
+

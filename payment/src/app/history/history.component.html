@@ -1,28 +1,29 @@
-<div>
+<div class="selected" align="center">
+
     <mat-table [dataSource]="payment" style="width:1000px">
 
-        <ng-container matColumnDef="memberid" >
-          <mat-header-cell *matHeaderCellDef >ID</mat-header-cell>
+        <ng-container matColumnDef="pmId" >
+          <mat-header-cell *matHeaderCellDef >No.</mat-header-cell>
           <mat-cell *matCellDef="let element" > {{element.pmId}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="username">
-          <mat-header-cell *matHeaderCellDef s> Username </mat-header-cell>
+        <ng-container matColumnDef="datePay">
+          <mat-header-cell *matHeaderCellDef s> DatePay </mat-header-cell>
           <mat-cell *matCellDef="let element" > {{element.datePay}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="firstname">
-          <mat-header-cell *matHeaderCellDef > Firstname </mat-header-cell>
+        <ng-container matColumnDef="typePay">
+          <mat-header-cell *matHeaderCellDef > TypePay </mat-header-cell>
           <mat-cell *matCellDef="let element" > {{element.typePay}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="surname">
-          <mat-header-cell *matHeaderCellDef > Surname </mat-header-cell>
+        <ng-container matColumnDef="customerName">
+          <mat-header-cell *matHeaderCellDef > CustomerName </mat-header-cell>
           <mat-cell *matCellDef="let element" > {{element.customer.customerName}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="membertype">
-          <mat-header-cell *matHeaderCellDef> MemberType </mat-header-cell>
+        <ng-container matColumnDef="statusPay">
+          <mat-header-cell *matHeaderCellDef> StatusPay </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.statusPay}} </mat-cell>
         </ng-container>
 
@@ -32,4 +33,5 @@
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 
       </mat-table>
+
 </div>

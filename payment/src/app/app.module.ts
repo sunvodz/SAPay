@@ -89,6 +89,7 @@ const appRoutes: Routes = [
     MatNativeDateModule,
     RouterModule.forRoot([
       {path: 'payment', component: PaymentComponent},
+      {path: 'history', component: HistoryComponent},
       {path: '', component: PaymentComponent},
     ])
   ],
