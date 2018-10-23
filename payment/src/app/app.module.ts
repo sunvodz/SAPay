@@ -39,6 +39,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material';
 import { PaymentService } from './payment.service';
 import { HistoryComponent } from './history/history.component';
+import { LoginuserComponent } from './loginuser/loginuser.component';
 
 const appRoutes: Routes = [
 ];
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     PaymentComponent,
-    HistoryComponent
+    HistoryComponent,
+    LoginuserComponent
   ],
   imports: [
     BrowserModule,

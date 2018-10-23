@@ -70,7 +70,7 @@ public class Data {
             }
             });
 
-            Stream.of("Admin", "SunvoDz", "Au").forEach(stName -> {
+            Stream.of("Admin").forEach(stName -> {
                 Staff staffdb = new Staff();
                 staffdb.setStaffName(stName);
                 staffRepository.save(staffdb);
@@ -81,26 +81,14 @@ public class Data {
                     staffdb.setPosition("administrator");
                     staffRepository.save(staffdb);
                  }
-                 else if(stName == "SunvoDz"){
-                    Staff staffid = staffRepository.findByStID(2L);
-                    staffdb.setStaffIDs("S"+staffid.getStID());
-                    staffdb.setPosition("accountant");
-                    staffRepository.save(staffdb);
-                 }
-                 else if(stName == "Au"){
-                    Staff staffid = staffRepository.findByStID(3L);
-                    staffdb.setStaffIDs("S"+staffid.getStID());
-                    staffdb.setPosition("accountant");
-                    staffRepository.save(staffdb);
-
-                }
             });
+
                 Customer c1 = customerRepository.findByCusId(1L);
                 Customer c2 = customerRepository.findByCusId(2L);
                 Customer c3 = customerRepository.findByCusId(3L);
                 Staff st1 = staffRepository.findByStID(1L);
-                Staff st2 = staffRepository.findByStID(2L);
-                Staff st3 = staffRepository.findByStID(3L);
+                
+
 
                 Stream.of("B001","B002","B003").forEach(bkid -> {
 
@@ -124,7 +112,7 @@ public class Data {
                     bookingdb.setLocation("KORAT");
                     bookingdb.setCustomer(c2);
                     bookingdb.setStatusBooking("not paid");
-                    bookingdb.setStaff(st2);
+                    bookingdb.setStaff(st1);
                     bookingRepository.save(bookingdb);
                  }
                  else if(bkid == "B003"){
@@ -133,7 +121,7 @@ public class Data {
                     bookingdb.setLocation("Bangkok");
                     bookingdb.setCustomer(c3);
                     bookingdb.setStatusBooking("not paid");
-                    bookingdb.setStaff(st3);
+                    bookingdb.setStaff(st1);
                     bookingRepository.save(bookingdb);
                 }
                 });
@@ -205,10 +193,11 @@ public class Data {
                     paymentdb.setStaff(st1);
                     paymentdb.setDatePay(date);
                     paymentdb.setStatusPay("paid");
+                    paymentdb.setLeaseIDs(le1);
                     payMentRepository.save(paymentdb);
                  }
                 });
-            
+
                 System.out.println("\n Spring-Boot Complete");
         };
         

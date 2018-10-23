@@ -23,7 +23,6 @@ public class Selling {
     private String sellingName;
     private int    sellingPrice;
     private String statusSelling;
-    
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Customer.class)
     @JoinColumn(name = "customerId", insertable = true)

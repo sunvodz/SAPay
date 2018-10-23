@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public interface SellingRepository extends JpaRepository<Selling, Long> {
     Selling findBySeid(Long id);
     Selling findBySellingIDs(String sellingIDs);
+    
     Optional<Selling> findByCustomer(Customer cuntomerID);
 	Optional<Selling> findByStatusSelling(String status);
 }

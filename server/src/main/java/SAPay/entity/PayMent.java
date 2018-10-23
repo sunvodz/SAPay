@@ -32,4 +32,15 @@ public class PayMent {
     @JoinColumn(name = "customerId")
     private Customer customer;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "bookingIDs")
+    private Booking bookingIDs;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "leaseIDs")
+    private Lease leaseIDs;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "sellingIDs")
+    private Selling sellingIDs;
 }

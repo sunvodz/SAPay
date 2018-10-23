@@ -107,7 +107,6 @@ export class PaymentComponent implements OnInit {
     });
   }
   payLeaseButtom() {
-
     if (this.leaseData.LeaseName === '' ||
     this.leaseData.LeasePrice ===  ''
     ) {
