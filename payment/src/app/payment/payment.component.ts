@@ -11,13 +11,14 @@ import { PaymentService } from '../payment.service';
 })
 
 export class PaymentComponent implements OnInit {
+  title = 'Renting and Dressing System';
+  staffs: Array<any>;
 
   CurrentDate = new Date();
   lease: Array<any>;
   selling: Array<any>;
   booking: Array<any>;
   userId: Array<any>;
-
 
   LeaseName: Array<any>;
   LeasePrice: Array<any>;
@@ -68,7 +69,10 @@ export class PaymentComponent implements OnInit {
       this.userId = data;
       console.log(this.userId);
     });
-
+    this.paymentService.getStaff().subscribe(data => {
+      this.staffs = data;
+      console.log(this.staffs);
+    });
 
 
   }

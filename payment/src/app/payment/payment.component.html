@@ -1,4 +1,17 @@
 <body bgcolor="#ffc0cb">
+    <div id ="style1" style="text-align: right">
+        <div *ngFor="let staff of staffs">
+        Name :{{staff.staffName}}
+        </div></div>
+    <mat-toolbar class="toolbar">
+      <mat-toolbar-row>
+        <a class="menu-list">{{title}}</a>
+        <span class="example-spacer"></span>
+        <button mat-button routerLink="/payment">Payment</button>
+        <button mat-button routerLink="/history">History</button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
     <div align="center">
       {{CurrentDate | date}}
     <form class="example-form">

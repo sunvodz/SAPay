@@ -39,7 +39,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material';
 import { PaymentService } from './payment.service';
 import { HistoryComponent } from './history/history.component';
-import { LoginuserComponent } from './loginuser/loginuser.component';
+import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
 ];
@@ -47,9 +47,10 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     PaymentComponent,
-    HistoryComponent,
-    LoginuserComponent
+    HistoryComponent
+
   ],
   imports: [
     BrowserModule,
@@ -90,9 +91,10 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     MatNativeDateModule,
     RouterModule.forRoot([
+      {path: 'home', component: HomeComponent},
       {path: 'payment', component: PaymentComponent},
       {path: 'history', component: HistoryComponent},
-      {path: '', component: PaymentComponent},
+      {path: '', component: HomeComponent},
     ])
   ],
   providers: [PaymentService],
