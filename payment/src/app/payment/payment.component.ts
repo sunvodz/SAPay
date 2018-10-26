@@ -20,11 +20,12 @@ export class PaymentComponent implements OnInit {
   booking: Array<any>;
   userId: Array<any>;
 
+  LeaseId: Array<any>;
   LeaseName: Array<any>;
   LeasePrice: Array<any>;
   LeaseStatus: Array<any>;
 
-
+  SellingId: Array<any>;
   SellingName: Array<any>;
   SellingPrice: Array<any>;
   StatusSelling: Array<any>;
@@ -38,12 +39,14 @@ export class PaymentComponent implements OnInit {
   };
 
   leaseData = {
+    LeaseId: '',
     LeaseName: '',
     LeasePrice: '',
     LeaseStatus: ''
   };
 
   sellingData = {
+    SellingId: '',
     SellingName: '',
     SellingPrice: '',
     StatusSelling: ''
@@ -54,10 +57,6 @@ export class PaymentComponent implements OnInit {
     BookingPrice: '',
     StatusBooking: ''
   };
-  num = 1;
-  lid = 0;
-  sell = 0;
-  book = 0;
   payment: Array<any>;
 
 
@@ -77,9 +76,9 @@ export class PaymentComponent implements OnInit {
 
   }
   searchId() {
-    this.httpClient.get('http://localhost:8080/lease'),
-    this.httpClient.get('http://localhost:8080/selling'),
-    this.httpClient.get('http://localhost:8080/booking')
+    this.httpClient.get('http://localhost:8080/lease/'),
+    this.httpClient.get('http://localhost:8080/selling/'),
+    this.httpClient.get('http://localhost:8080/booking/')
     .subscribe(
         data => {
           this.paymentService.getLease(), this.paymentService.getSelling();
@@ -111,13 +110,13 @@ export class PaymentComponent implements OnInit {
     });
   }
   payLeaseButtom() {
-    if (this.leaseData.LeaseName === '' ||
+    if (this.leaseData.LeaseId === '' ||
     this.leaseData.LeasePrice ===  ''
     ) {
      alert('กรอกข้อมูลให้ครบถ้วน');
 } else {
-  this.num++;
-  this.httpClient.post('http://localhost:8080/payment/'+ 'P00' + this.num + '/' + 'Lease' + '/' + 'paid' + '/' + this.userData.userId, this.payment)
+  this.httpClient.post('http://localhost:8080/payment/' + 'Lease' + '/' + 'paid' + '/' + this.userData.userId +
+                                                    '/' + 0 + '/' + 0 + '/' + this.leaseData.LeaseId, this.payment)
   .subscribe(
     data => {
         console.log('Post successful', data);
@@ -127,8 +126,7 @@ export class PaymentComponent implements OnInit {
         console.log('Error', error);
     }
 );
-this.lid++;
-this.httpClient.put('http://localhost:8080/lease/' + this.lid + '/' + this.leaseData.LeaseStatus, this.lease)
+this.httpClient.put('http://localhost:8080/lease/' + this.leaseData.LeaseId + '/' + 'paid', this.lease)
     .subscribe(
       data => {
         if (data) {
@@ -143,13 +141,13 @@ this.httpClient.put('http://localhost:8080/lease/' + this.lid + '/' + this.lease
   }
 }
   paySellingButtom() {
-    if (this.sellingData.SellingName === '' ||
+    if (this.sellingData.SellingId === '' ||
     this.sellingData.SellingPrice ===  ''
     ) {
      alert('กรอกข้อมูลให้ครบถ้วน');
 } else {
-  this.num++ ;
-  this.httpClient.post('http://localhost:8080/payment/'+ 'S00' + this.num + '/' + 'Selling' + '/' + 'paid' + '/' + this.userData.userId, this.payment)
+  this.httpClient.post('http://localhost:8080/payment/' + 'Selling' + '/' + 'paid' + '/' + this.userData.userId +
+                                                    '/' + this.sellingData.SellingId + '/' + 0 + '/' + 0, this.payment)
   .subscribe(
     data => {
         console.log('Post successful', data);
@@ -159,10 +157,7 @@ this.httpClient.put('http://localhost:8080/lease/' + this.lid + '/' + this.lease
         console.log('Error', error);
     }
 );
-
-  }
-  this.sell++;
-this.httpClient.put('http://localhost:8080/selling/' + this.sell + '/' + this.sellingData.StatusSelling, this.selling)
+this.httpClient.put('http://localhost:8080/selling/' + this.sellingData.SellingId + '/' + 'paid', this.selling)
     .subscribe(
       data => {
         if (data) {
@@ -174,6 +169,7 @@ this.httpClient.put('http://localhost:8080/selling/' + this.sell + '/' + this.se
     }
     );
   }
+  }
   payBookingButtom() {
 
     if (this.bookingData.Bookingid === '' ||
@@ -181,8 +177,8 @@ this.httpClient.put('http://localhost:8080/selling/' + this.sell + '/' + this.se
   ) {
    alert('กรอกข้อมูลให้ครบถ้วน');
 } else {
-  this.num++ ;
-this.httpClient.post('http://localhost:8080/payment/'+ 'B00' + this.num + '/' + 'Booking' + '/' + 'paid' + '/' + this.userData.userId, this.payment)
+this.httpClient.post('http://localhost:8080/payment/' + 'Booking' + '/' + 'paid' + '/' + this.userData.userId +
+                                                  '/' + 0 + '/' + this.bookingData.Bookingid + '/' + 0, this.payment)
 .subscribe(
   data => {
       console.log('Post successful', data);
@@ -192,10 +188,7 @@ this.httpClient.post('http://localhost:8080/payment/'+ 'B00' + this.num + '/' + 
       console.log('Error', error);
   }
 );
-
-}
-this.book++;
-this.httpClient.put('http://localhost:8080/booking/' + this.book + '/' + this.bookingData.StatusBooking, this.booking)
+this.httpClient.put('http://localhost:8080/booking/' + this.bookingData.Bookingid + '/' + 'paid', this.booking)
     .subscribe(
       data => {
         if (data) {
@@ -206,6 +199,8 @@ this.httpClient.put('http://localhost:8080/booking/' + this.book + '/' + this.bo
       console.log('error', error);
     }
     );
+}
+
 }
 
 

@@ -19,7 +19,6 @@ public class Lease {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="lease_seq")
     @Column(name="Lease_ID",unique = true, nullable = false)
     private @NonNull Long lid;
-    private String leaseIDs;
     private String leaseName;
     private int    leasePrice;
     private String statusLease;

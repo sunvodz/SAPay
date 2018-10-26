@@ -102,22 +102,31 @@ public class PayMentController {
             private boolean isStaff(Staff staff){
                 return staff.getStaffName().equals("Admin");
         }
-        @PostMapping("/payment/{payid}/{typepay}/{statuspay}/{customer}")
-        public PayMent newPayMent(@PathVariable String payid,@PathVariable String statuspay,
-                            @PathVariable String customer,
-                            @PathVariable String typepay){
+
+        @PostMapping("/payment/{typepay}/{statuspay}/{customer}/{selling}/{style}/{lease}")
+        public PayMent newPayMent(@PathVariable String typepay,@PathVariable String statuspay,
+                            @PathVariable String customer,@PathVariable Long selling,
+                            @PathVariable Long style,@PathVariable Long lease){
         PayMent newPayMent = new PayMent();
         newPayMent.setStatusPay(statuspay);
-        newPayMent.setPaymentIDs(payid);
         newPayMent.setTypePay(typepay);
         
         Date datePay = new Date();
         newPayMent.setDatePay(datePay);
-
-
+       
         Customer customerid = customerRepository.findByCustomerID(customer);
         newPayMent.setCustomer(customerid);
         
+        
+        Selling sellingid = sellingRepository.findBySeid(selling);
+        newPayMent.setSeid(sellingid);
+       
+        Booking styleid = bookingRepository.findByBkId(style);
+        newPayMent.setBkId(styleid);
+       
+        Lease leaseid = leaseRepository.findByLid(lease);
+        newPayMent.setLid(leaseid);
+      
         return paymentRepository.save(newPayMent); 
     }
 

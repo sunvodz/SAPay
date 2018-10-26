@@ -19,28 +19,24 @@ public class PayMent {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="payMent_seq")
     @Column(name="PayMent_ID",unique = true, nullable = false)
     private @NonNull Long pmId;
-    private String paymentIDs;
     private @NonNull Date datePay;
     private String typePay;
     private String statusPay;
-
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "staffId")
-    private Staff staff;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customerId")
     private Customer customer;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "bookingIDs")
-    private Booking bookingIDs;
+    @JoinColumn(name = "bkId")
+    private Booking bkId;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "leaseIDs")
-    private Lease leaseIDs;
+    @JoinColumn(name = "lid")
+    private Lease lid;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "sellingIDs")
-    private Selling sellingIDs;
+    @JoinColumn(name = "seid")
+    private Selling seid;
+
 }

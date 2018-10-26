@@ -1,11 +1,8 @@
 package SAPay;
 import SAPay.Repository.*;
 import SAPay.entity.*;
-
-import java.awt.print.Book;
 import java.util.Date;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -27,7 +24,7 @@ public class Data {
                 SellingRepository sellingRepository,
                 StaffRepository staffRepository){
     }
-
+    
     @Bean
     CharacterEncodingFilter characterEncodingFilter() {
         CharacterEncodingFilter filter = new CharacterEncodingFilter();
@@ -90,13 +87,13 @@ public class Data {
                 
 
 
-                Stream.of("B001","B002","B003").forEach(bkid -> {
+                Stream.of(1L,2L,3L).forEach(bkid -> {
 
                     Booking bookingdb = new Booking();
-                    bookingdb.setBookingIDs(bkid);
+                    bookingdb.setBkId(bkid);
                     bookingRepository.save(bookingdb);
                     
-                 if (bkid == "B001") {
+                 if (bkid == 1L) {
                     bookingdb.setBookPrice(300);
                     bookingdb.setBookingDate(date);
                     bookingdb.setLocation("Suranaree");
@@ -106,7 +103,7 @@ public class Data {
                     bookingRepository.save(bookingdb);
     
                  }
-                 else if(bkid == "B002"){
+                 else if(bkid == 2L){
                     bookingdb.setBookPrice(500);
                     bookingdb.setBookingDate(date);
                     bookingdb.setLocation("KORAT");
@@ -115,7 +112,7 @@ public class Data {
                     bookingdb.setStaff(st1);
                     bookingRepository.save(bookingdb);
                  }
-                 else if(bkid == "B003"){
+                 else if(bkid == 3L){
                     bookingdb.setBookPrice(1000);
                     bookingdb.setBookingDate(date);
                     bookingdb.setLocation("Bangkok");
@@ -126,12 +123,12 @@ public class Data {
                 }
                 });
 
-                Stream.of("L001","L002","L003").forEach(leid -> {
+                Stream.of(1L,2L,3L).forEach(leid -> {
                     Lease leasedb = new Lease();
-                    leasedb.setLeaseIDs(leid);
+                    leasedb.setLid(leid);
                     leaseRepository.save(leasedb);
                     
-                 if (leid == "L001") {
+                 if (leid == 1L) {
                     leasedb.setLeaseName("Thai");
                     leasedb.setLeasePrice(500);
                     leasedb.setCustomer(c1);
@@ -140,7 +137,7 @@ public class Data {
                     leasedb.setStatusLease("paid");
                     leaseRepository.save(leasedb);
                  }
-                 else if(leid == "L002"){
+                 else if(leid == 2L){
                     leasedb.setLeaseName("Lao");
                     leasedb.setLeasePrice(300);
                     leasedb.setCustomer(c2);
@@ -149,7 +146,7 @@ public class Data {
                     leasedb.setStatusLease("not paid");
                     leaseRepository.save(leasedb);
                  }
-                 else if(leid == "L003"){
+                 else if(leid == 3L){
                     leasedb.setLeaseName("Eng");
                     leasedb.setLeasePrice(200);
                     leasedb.setCustomer(c3);
@@ -159,12 +156,12 @@ public class Data {
                     leaseRepository.save(leasedb);
                 }
                 });
-                Stream.of("SL001","SL002").forEach(slid -> {
+                Stream.of(1L,2L).forEach(slid -> {
                     Selling sellingdb = new Selling();
-                    sellingdb.setSellingIDs(slid);
+                    sellingdb.setSeid(slid);
                     sellingRepository.save(sellingdb);
 
-                 if (slid == "SL001") {
+                 if (slid == 1L) {
                     sellingdb.setSellingName("Lao");
                     sellingdb.setSellingPrice(1500);
                     sellingdb.setCustomer(c1);
@@ -172,7 +169,7 @@ public class Data {
                     sellingRepository.save(sellingdb);
                  }
                  
-                 else if(slid == "SL002"){
+                 else if(slid == 2L){
                     sellingdb.setSellingName("Lao");
                     sellingdb.setSellingPrice(1500);
                     sellingdb.setCustomer(c3);
@@ -180,20 +177,17 @@ public class Data {
                     sellingRepository.save(sellingdb);
                 }
                 });
-                Lease le1 = leaseRepository.findByLid(1L);
 
-                Stream.of("P001").forEach(pmid -> {
+                Stream.of(1L).forEach(pmid -> {
                     PayMent paymentdb = new PayMent();
-                    paymentdb.setPaymentIDs(pmid);
+                    paymentdb.setPmId(pmid);
                     payMentRepository.save(paymentdb);
                     
-                 if (pmid == "P001") {
+                 if (pmid == 1L) {
                     paymentdb.setTypePay("Lease");
                     paymentdb.setCustomer(c1);
-                    paymentdb.setStaff(st1);
                     paymentdb.setDatePay(date);
                     paymentdb.setStatusPay("paid");
-                    paymentdb.setLeaseIDs(le1);
                     payMentRepository.save(paymentdb);
                  }
                 });

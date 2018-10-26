@@ -2,7 +2,6 @@ package SAPay.entity;
 import javax.persistence.*;
 import lombok.*;
 import java.util.*;
-import java.util.Collection;
 
 @Data
 @Entity
@@ -17,7 +16,6 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="booking_seq")
     @Column(name="Booking_ID",unique = true, nullable = false)
     private @NonNull Long bkId;
-    private String bookingIDs;
     private Date bookingDate;
     private String location;
     private String statusBooking;
@@ -30,9 +28,5 @@ public class Booking {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Staff.class)
     @JoinColumn(name = "staffId", insertable = true)
     public Staff staff;
-
-    public Booking(String statusBooking) {
-        this.statusBooking = statusBooking;
-    }
 
 }

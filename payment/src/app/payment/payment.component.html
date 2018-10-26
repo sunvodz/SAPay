@@ -24,9 +24,7 @@
       </mat-form-field>
       </form>
       <button mat-raised-button (click)="searchId()" color="warn">Search</button>
-
   </div>
-
   <fieldset>
     <legend>Order</legend>
     <fieldset>
@@ -37,15 +35,15 @@
 
 
     <mat-form-field class="example-full-width">
-        <mat-select placeholder="LeaseName" [value]="leaseData.LeaseName" [(ngModel)]="leaseData.LeaseName" name="LeaseName">
-          <mat-option *ngFor="let LeaseName of LeaseName" [value]="LeaseName.leaseName">
+        <mat-select placeholder="LeaseId" [value]="leaseData.LeaseId"  [(ngModel)]="leaseData.LeaseId">
+          <mat-option *ngFor="let LeaseName of LeaseName" [value]="LeaseName.lid">
               {{LeaseName.leaseName}}
           </mat-option>
         </mat-select>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-        <mat-select placeholder="LeasePrice" [value]="leaseData.LeasePrice" [(ngModel)]="leaseData.LeasePrice" name="LeasePrice">
+        <mat-select placeholder="LeasePrice" [value]="leaseData.LeasePrice" [(ngModel)]="leaseData.LeasePrice" >
           <mat-option *ngFor="let LeasePrice of LeasePrice" [value]="LeasePrice.leasePrice">
               {{LeasePrice.leasePrice}}
           </mat-option>
@@ -63,15 +61,15 @@
 
     <div class="selected" align="center">
       <mat-form-field class="example-full-width">
-          <mat-select placeholder="SellingName" [value]="sellingData.SellingName" [(ngModel)]="sellingData.SellingName" name="SellingName">
-            <mat-option *ngFor="let SellingName of SellingName" [value]="SellingName.sellingName">
+          <mat-select placeholder="SellingId" [value]="sellingData.SellingId" [(ngModel)]="sellingData.SellingId" >
+            <mat-option *ngFor="let SellingName of SellingName" [value]="SellingName.seid">
                 {{SellingName.sellingName}}
             </mat-option>
           </mat-select>
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-          <mat-select placeholder="SellingPrice" [value]="sellingData.SellingPrice" [(ngModel)]="sellingData.SellingPrice" name="SellingPrice">
+          <mat-select placeholder="SellingPrice" [value]="sellingData.SellingPrice" [(ngModel)]="sellingData.SellingPrice" >
             <mat-option *ngFor="let SellingPrice of SellingPrice" [value]="SellingPrice.sellingPrice">
                 {{SellingPrice.sellingPrice}}
             </mat-option>
@@ -90,15 +88,15 @@
 
           <div class="selected" align="center">
             <mat-form-field class="example-full-width">
-                <mat-select placeholder="BookingID" [value]="bookingData.Bookingid" [(ngModel)]="bookingData.Bookingid" name="bookingIDs">
-                  <mat-option *ngFor="let Bookingid of Bookingid" [value]="Bookingid.bookingIDs">
-                      {{Bookingid.bookingIDs}}
+                <mat-select placeholder="Bookingid" [value]="bookingData.Bookingid" [(ngModel)]="bookingData.Bookingid">
+                  <mat-option *ngFor="let Bookingid of Bookingid" [value]="Bookingid.bkId">
+                      {{Bookingid.bkId}}
                   </mat-option>
                 </mat-select>
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-                <mat-select placeholder="BookingPrice" [value]="bookingData.BookingPrice" [(ngModel)]="bookingData.BookingPrice" name="BookingPrice">
+                <mat-select placeholder="BookingPrice" [value]="bookingData.BookingPrice" [(ngModel)]="bookingData.BookingPrice" >
                   <mat-option *ngFor="let BookingPrice of BookingPrice" [value]="BookingPrice.bookPrice">
                       {{BookingPrice.bookPrice}}
                   </mat-option>

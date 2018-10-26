@@ -19,7 +19,6 @@ public class Selling {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="selling_seq")
     @Column(name="Selling_ID",unique = true, nullable = false)
     private @NonNull Long seid;
-    private String sellingIDs;
     private String sellingName;
     private int    sellingPrice;
     private String statusSelling;
